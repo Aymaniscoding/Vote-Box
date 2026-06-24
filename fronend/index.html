@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VoteBox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <span class="logo">🗳️ VoteBox</span>
+    <div id="navRight"></div>
+  </nav>
+
+  <!-- AUTH -->
+  <div id="authPage" class="page active">
+    <div class="auth-wrap">
+      <div class="auth-box">
+        <h2>VoteBox</h2>
+        <p class="sub">Secure online elections</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('login')">Login</button>
+          <button class="tab"        onclick="switchTab('register')">Register</button>
+        </div>
+        <div id="loginPanel">
+          <input id="loginUser" class="input" type="text"     placeholder="Username"/>
+          <input id="loginPass" class="input" type="password" placeholder="Password"/>
+          <button class="btn primary" onclick="login()">Login</button>
+        </div>
+        <div id="registerPanel" class="hidden">
+          <input id="regUser" class="input" type="text"     placeholder="Username"/>
+          <input id="regPass" class="input" type="password" placeholder="Password"/>
+          <button class="btn primary" onclick="register()">Create Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELECTIONS -->
+  <div id="electionsPage" class="page">
+    <div class="container">
+      <div class="page-head">
+        <div><h2>Elections</h2><p>Vote or view results</p></div>
+      </div>
+      <div id="electionsList" class="grid"></div>
+    </div>
+  </div>
+
+  <!-- VOTE -->
+  <div id="votePage" class="page">
+    <div class="container narrow">
+      <button class="back" onclick="goTo('electionsPage')">← Back to elections</button>
+      <div id="voteContent"></div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="resultsPage" class="page">
+    <div class="container narrow">
+      <button class="back" onclick="goTo('electionsPage')">← Back to elections</button>
+      <div id="resultsContent"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="adminPage" class="page">
+    <div class="container">
+      <div class="page-head"><h2>Admin Panel</h2><p>Create and manage elections</p></div>
+
+      <!-- Stats bar -->
+      <div id="statsBar" class="stats-bar"></div>
+
+      <!-- Admin sub-tabs -->
+      <div class="tabs admin-tabs">
+        <button class="tab active" id="atab-create"  onclick="adminTab('create')">Create</button>
+        <button class="tab"        id="atab-manage"  onclick="adminTab('manage')">Manage</button>
+        <button class="tab"        id="atab-users"   onclick="adminTab('users')">Users</button>
+        <button class="tab"        id="atab-audit"   onclick="adminTab('audit')">Audit Log</button>
+      </div>
+
+      <!-- CREATE panel -->
+      <div id="apanel-create">
+        <div class="card" style="max-width:520px">
+          <h3>New Election</h3>
+          <input    id="elTitle" class="input" type="text" placeholder="Election title"/>
+          <textarea id="elDesc"  class="input" rows="2"    placeholder="Description (optional)"></textarea>
+          <label class="lbl">Candidates</label>
+          <div id="candFields">
+            <input class="input cand" type="text" placeholder="Candidate 1"/>
+            <input class="input cand" type="text" placeholder="Candidate 2"/>
+          </div>
+          <button class="btn outline small" onclick="addCand()">+ Add Candidate</button>
+          <button class="btn primary"       onclick="createElection()">Create Election</button>
+        </div>
+      </div>
+
+      <!-- MANAGE panel -->
+      <div id="apanel-manage" class="hidden">
+        <div class="card">
+          <h3>Manage Elections</h3>
+          <div id="adminList"></div>
+        </div>
+      </div>
+
+      <!-- USERS panel -->
+      <div id="apanel-users" class="hidden">
+        <div class="card">
+          <h3>All Users</h3>
+          <div id="usersList"></div>
+        </div>
+      </div>
+
+      <!-- AUDIT LOG panel -->
+      <div id="apanel-audit" class="hidden">
+        <div class="card">
+          <h3>Audit Log</h3>
+          <p class="card-desc" style="margin-bottom:14px">Last 100 admin actions</p>
+          <div id="auditList"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
